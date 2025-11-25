@@ -31,7 +31,7 @@ export const TableRow: React.FC<TableRowProps> = memo(
         className="bg-white dark:bg-slate-900 border-b border-default dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
         onClick={handleRowClick}
       >
-        <td className="w-4 p-4">
+        <td className="w-4 p-3 sm:p-4">
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -44,12 +44,14 @@ export const TableRow: React.FC<TableRowProps> = memo(
         </td>
         <th
           scope="row"
-          className="px-6 py-4 font-medium text-heading whitespace-nowrap"
+          className="px-4 py-3 sm:px-6 sm:py-4 font-medium text-heading whitespace-nowrap"
         >
           {item.number}
         </th>
-        <td className="px-6 py-4">{item.storageArea}</td>
-        <td className="px-6 py-4">
+        <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
+          {item.storageArea}
+        </td>
+        <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
           {statusMeta ? (
             <span className="inline-flex items-center gap-2">
               <span
@@ -62,7 +64,7 @@ export const TableRow: React.FC<TableRowProps> = memo(
             item.status
           )}
         </td>
-        <td className="px-6 py-4">
+        <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
           {moment.unix(item.updatedAt).format("DD-MM-YYYY HH:ss")}
         </td>
       </tr>

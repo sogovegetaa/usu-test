@@ -55,20 +55,22 @@ const YardMap: React.FC = () => {
         </h2>
       </div>
 
-      <div className="inline-block rounded-base border border-default bg-slate-100 p-2 dark:bg-slate-900 dark:border-slate-700">
-        <div className="grid grid-cols-10 gap-[1px] bg-slate-300 dark:bg-slate-700">
-          {zones.map((zone) => (
-            <div
-              key={zone.id}
-              className={`relative aspect-square min-w-[18px] min-h-[18px] flex items-center justify-center text-[9px] border border-slate-200 ${getZoneColor(
-                zone.utilization
-              )}`}
-            >
-              <span className="font-medium">
-                {Math.round(zone.utilization)}%
-              </span>
-            </div>
-          ))}
+      <div className="max-w-full overflow-x-auto">
+        <div className="inline-block rounded-base border border-default bg-slate-100 p-2 dark:bg-slate-900 dark:border-slate-700">
+          <div className="grid grid-cols-10 gap-[1px] bg-slate-300 dark:bg-slate-700">
+            {zones.map((zone) => (
+              <div
+                key={zone.id}
+                className={`relative aspect-square min-w-[20px] min-h-[20px] flex items-center justify-center text-[9px] border border-slate-200 ${getZoneColor(
+                  zone.utilization
+                )}`}
+              >
+                <span className="font-medium">
+                  {Math.round(zone.utilization)}%
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="flex items-center gap-3 text-[11px] text-body dark:text-slate-300">

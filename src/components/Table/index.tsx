@@ -22,11 +22,22 @@ const MainTable: React.FC<Props> = ({ data }) => {
     handleStatusChange,
     handleDeleteSelected,
     toggleSelection,
+    toggleSelectAll,
   } = useContainerTable();
 
   const [activeContainer, setActiveContainer] = useState<Container | null>(
     null
   );
+
+  const currentIds = data.map((item) => item.id);
+
+  const allSelected =
+    currentIds.length > 0 &&
+    currentIds.every((id) => selectedIds.includes(id));
+
+  const someSelected =
+    !allSelected &&
+    currentIds.some((id) => selectedIds.includes(id));
 
   const handleRowOpenDetails = useCallback(
     (container: Container) => {
@@ -47,8 +58,12 @@ const MainTable: React.FC<Props> = ({ data }) => {
         onDeleteSelected={handleDeleteSelected}
       />
       <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default dark:bg-slate-900 dark:border-slate-800">
-        <table className="w-full text-sm text-left rtl:text-right text-body">
-          <Header />
+        <table className="w-full min-w-[640px] text-xs sm:text-sm text-left rtl:text-right text-body">
+          <Header
+            allSelected={allSelected}
+            someSelected={someSelected}
+            onToggleAll={() => toggleSelectAll(currentIds)}
+          />
           <tbody>
             {data.map((item) => {
               return (

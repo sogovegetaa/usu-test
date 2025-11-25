@@ -31,20 +31,20 @@ export const TableToolbar: React.FC<TableToolbarProps> = memo(
     );
 
     return (
-      <div className="flex justify-between items-center p-4 border-t border-l border-r border-default bg-white dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between p-4 border-t border-l border-r border-default bg-white dark:border-slate-800 dark:bg-slate-900">
         <Button
           icon={<DeleteIcon />}
-          className="bg-red-200 hover:bg-red-300 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-red-900 dark:hover:bg-red-800 dark:text-red-100"
+          className="w-full sm:w-auto justify-center bg-red-200 hover:bg-red-300 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-red-900 dark:hover:bg-red-800 dark:text-red-100"
           disabled={!selectedCount}
           onClick={onDeleteSelected}
         >
           Удалить
         </Button>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <select
             value={statusValue ?? ""}
             onChange={onStatusChange}
-            className="block rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2 text-sm text-heading focus:outline-none focus:ring-2 focus:ring-brand-soft dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
+            className="block w-full sm:w-auto rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2 text-sm text-heading focus:outline-none focus:ring-2 focus:ring-brand-soft dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
           >
             <option value="">Все статусы</option>
             {STATUS_MAP.map((s) => (
@@ -53,13 +53,15 @@ export const TableToolbar: React.FC<TableToolbarProps> = memo(
               </option>
             ))}
           </select>
-          <TextField
-            icon={<SearchIcon />}
-            label="Поиск"
-            placeholder="Поиск"
-            value={searchValue}
-            onChange={handleSearchInputChange}
-          />
+          <div className="w-full sm:w-64">
+            <TextField
+              icon={<SearchIcon />}
+              label="Поиск"
+              placeholder="Поиск"
+              value={searchValue}
+              onChange={handleSearchInputChange}
+            />
+          </div>
         </div>
       </div>
     );

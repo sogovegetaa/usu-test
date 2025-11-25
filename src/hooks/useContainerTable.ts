@@ -15,6 +15,7 @@ type UseContainerTableResult = {
   handleStatusChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleDeleteSelected: () => void;
   toggleSelection: (id: string) => void;
+  toggleSelectAll: (currentIds: string[]) => void;
 };
 
 export const useContainerTable = (): UseContainerTableResult => {
@@ -68,6 +69,22 @@ export const useContainerTable = (): UseContainerTableResult => {
     );
   }, []);
 
+  const toggleSelectAll = useCallback((currentIds: string[]) => {
+    setSelectedIds((prev) => {
+      if (!currentIds.length) return prev;
+
+      const allSelected = currentIds.every((id) => prev.includes(id));
+
+      if (allSelected) {
+        return prev.filter((id) => !currentIds.includes(id));
+      }
+
+      const set = new Set(prev);
+      currentIds.forEach((id) => set.add(id));
+      return Array.from(set);
+    });
+  }, []);
+
   const handleDeleteSelected = useCallback(() => {
     if (!selectedIds.length) return;
 
@@ -97,5 +114,6 @@ export const useContainerTable = (): UseContainerTableResult => {
     handleStatusChange,
     handleDeleteSelected,
     toggleSelection,
+    toggleSelectAll,
   };
 };
